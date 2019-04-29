@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "19948405446",
+    "firebase_url": "https://pro-female.firebaseio.com",
+    "project_id": "pro-female",
+    "storage_bucket": "pro-female.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:19948405446:android:aa51c6547aae2299",
+        "android_client_info": {
+          "package_name": "idanielsfree.profemale"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "19948405446-u4rmr18qi5hk75lipdpotd3a69ivthpp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "idanielsfree.profemale",
+            "certificate_hash": "6f116a9121696fafb02d6a9841cf1cf76eb3b88b"
+          }
+        },
+        {
+          "client_id": "19948405446-3p8hle6tuntscnpfb9rp4odn61g2m671.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtdap5VqC4Eiosiw5P2hGn3NAzMNTWfxQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "19948405446-3p8hle6tuntscnpfb9rp4odn61g2m671.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
