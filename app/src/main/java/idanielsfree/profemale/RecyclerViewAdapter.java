@@ -7,7 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -24,8 +27,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_categorias, parent, false);
-        MyViewHolder view_holder = new MyViewHolder(view);
+        View view;
+        view = LayoutInflater.from(context).inflate(R.layout.item_categorias, parent, false);
+        final MyViewHolder view_holder = new MyViewHolder(view);
+
+        view_holder.item_categorias.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "TESTE " + String.valueOf(view_holder.getAdapterPosition()), Toast.LENGTH_SHORT).show();
+            }
+        });
+
         return view_holder;
     }
 
@@ -42,12 +54,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
+        private LinearLayout item_categorias;
         private TextView descricao;
         private ImageView foto;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            item_categorias = itemView.findViewById(R.id.categoria_item);
             descricao = itemView.findViewById(R.id.descricao_categoria);
             foto = itemView.findViewById(R.id.img_categoria);
         }

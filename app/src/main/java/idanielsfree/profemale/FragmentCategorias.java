@@ -42,6 +42,6 @@ public class FragmentCategorias extends Fragment {
         lst_categorias.add(new Categorias("Imagens", R.drawable.imagens));
         lst_categorias.add(new Categorias("Vídeos", R.drawable.videos));
         lst_categorias.add(new Categorias("Histórias", R.drawable.historias));
-        lst_categorias.add(new Categorias("fanfics", R.drawable.fanfics));
+        lst_categorias.add(new Categorias("Fanfics", R.drawable.fanfics));
     }
 }
