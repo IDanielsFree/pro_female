@@ -5,14 +5,12 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Toolbar mToolbar;
-    private ViewPager myViewPager;
-    private TabLayout myTabeLayout;
-    private TabsAccessorAdapter myTabsAccessorAdapter;
+    private TabLayout tablayout;
+    private ViewPager viewpager;
+    private ViewPagerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //Ações
+
     private void SendUserToSettingsActivity() {
         Intent settingsIntent = new Intent(MainActivity.this, Login.class);
         settingsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -35,15 +35,23 @@ public class MainActivity extends AppCompatActivity {
     //Starters
 
     private void inicia_elementos() {
-        mToolbar = findViewById(R.id.main_page_toolbar);
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("PRO female");
-        //
-        myViewPager = findViewById(R.id.main_tabs_pager);
-        myTabsAccessorAdapter = new TabsAccessorAdapter(getSupportFragmentManager());
-        myViewPager.setAdapter(myTabsAccessorAdapter);
 
-        myTabeLayout = findViewById(R.id.main_tabs);
-        myTabeLayout.setupWithViewPager(myViewPager);
+        tablayout = findViewById(R.id.tablayout);
+        viewpager = findViewById(R.id.viewpager);
+        adapter = new ViewPagerAdapter(getSupportFragmentManager());
+
+        adapter.AddFragment(new FragmentImagens(), "");
+        adapter.AddFragment(new FragmentVideos(), "");
+        adapter.AddFragment(new FragmentHistorias(), "");
+
+        viewpager.setAdapter(adapter);
+        tablayout.setupWithViewPager(viewpager);
+
+        tablayout.getTabAt(0).setIcon(R.drawable.ic_photo);
+        tablayout.getTabAt(1).setIcon(R.drawable.ic_video);
+        tablayout.getTabAt(2).setIcon(R.drawable.ic_books);
+
+        //
+
     }
 }
