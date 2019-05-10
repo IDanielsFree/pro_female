@@ -8,19 +8,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class FragmentVideos extends Fragment {
+public class FragmentPrincipal extends Fragment {
 
     View v;
 
-    public FragmentVideos() {
+    public FragmentPrincipal() {
 
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        v = inflater.inflate(R.layout.videos_fragment,container,false);
+        v = inflater.inflate(R.layout.principal_fragment,container,false);
         return v;
     }
-
 }

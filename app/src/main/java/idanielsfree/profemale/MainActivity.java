@@ -40,16 +40,14 @@ public class MainActivity extends AppCompatActivity {
         viewpager = findViewById(R.id.viewpager);
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
-        adapter.AddFragment(new FragmentImagens(), "");
-        adapter.AddFragment(new FragmentVideos(), "");
-        adapter.AddFragment(new FragmentHistorias(), "");
+        adapter.AddFragment(new FragmentPrincipal(), "");
+        adapter.AddFragment(new FragmentCategorias(), "");
 
         viewpager.setAdapter(adapter);
         tablayout.setupWithViewPager(viewpager);
 
-        tablayout.getTabAt(0).setIcon(R.drawable.ic_photo);
-        tablayout.getTabAt(1).setIcon(R.drawable.ic_video);
-        tablayout.getTabAt(2).setIcon(R.drawable.ic_books);
+        tablayout.getTabAt(0).setIcon(R.drawable.ic_star);
+        tablayout.getTabAt(1).setIcon(R.drawable.ic_list);
 
         //
 
