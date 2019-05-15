@@ -53,7 +53,7 @@ public class FragmentPrincipal extends Fragment {
     }
 
     private class MyRecyclerAdapter extends RecyclerView.Adapter<GridHolder> {
-
+        //Refazer Adapter com ArrayList
         Bitmap[] bitmaps;
 
         public MyRecyclerAdapter(Bitmap[] bitmaps) {
