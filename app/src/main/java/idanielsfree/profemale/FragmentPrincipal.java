@@ -1,23 +1,36 @@
 package idanielsfree.profemale;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
+import java.net.URI;
+import java.util.ArrayList;
 
 public class FragmentPrincipal extends Fragment {
 
     View v;
-    RecyclerView recycler_view;
+    private static final String TAG = "FragmentPrincipal";
+    private static final int NUM_COLUMNS = 2;
+
+    private ArrayList<String> mImageUrls = new ArrayList<>();
+    private ArrayList<String> mNames = new ArrayList<>();
 
     public FragmentPrincipal() {
 
@@ -28,64 +41,124 @@ public class FragmentPrincipal extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.principal_fragment,container,false);
 
-        recycler_view = v.findViewById(R.id.recyclerview_principais);
-        Bitmap[] bitmaps = getBitmaps();
-        MyRecyclerAdapter myRecyclerAdapter = new MyRecyclerAdapter(bitmaps);
-        recycler_view.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
-        recycler_view.setAdapter(myRecyclerAdapter);
+        initImageBitmaps();
+
         return v;
     }
 
-    private Bitmap[] getBitmaps() {
-        Bitmap[] tempBitMaps = new Bitmap[10];
-        tempBitMaps[0] = BitmapFactory.decodeResource(getResources(), R.drawable.p_1);
-        tempBitMaps[1] = BitmapFactory.decodeResource(getResources(), R.drawable.p_2);
-        tempBitMaps[2] = BitmapFactory.decodeResource(getResources(), R.drawable.p_3);
-        tempBitMaps[3] = BitmapFactory.decodeResource(getResources(), R.drawable.p_4);
-        tempBitMaps[4] = BitmapFactory.decodeResource(getResources(), R.drawable.p_5);
-        tempBitMaps[5] = BitmapFactory.decodeResource(getResources(), R.drawable.p_6);
-        tempBitMaps[6] = BitmapFactory.decodeResource(getResources(), R.drawable.p_7);
-        tempBitMaps[7] = BitmapFactory.decodeResource(getResources(), R.drawable.p_8);
-        tempBitMaps[8] = BitmapFactory.decodeResource(getResources(), R.drawable.p_9);
-        tempBitMaps[9] = BitmapFactory.decodeResource(getResources(), R.drawable.p_10);
 
-        return tempBitMaps;
+    private void initRecyclerView() {
+        Log.d(TAG, "initRecyclerView: preparing staggered recyclerview.");
+
+        RecyclerView recyclerView = v.findViewById(R.id.recyclerview_principais);
+        StaggeredRecyclerViewAdapter staggeredRecyclerViewAdapter = new StaggeredRecyclerViewAdapter(getContext(), mNames, mImageUrls);
+        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(NUM_COLUMNS, LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(staggeredGridLayoutManager);
+        recyclerView.setAdapter(staggeredRecyclerViewAdapter);
+
     }
 
-    private class MyRecyclerAdapter extends RecyclerView.Adapter<GridHolder> {
-        //Refazer Adapter com ArrayList
-        Bitmap[] bitmaps;
+    private void initImageBitmaps() {
+        Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
 
-        public MyRecyclerAdapter(Bitmap[] bitmaps) {
-            this.bitmaps = bitmaps;
+        mImageUrls.add("https://firebasestorage.googleapis.com/v0/b/pro-female.appspot.com/o/p_1.png?alt=media&token=d49cf9d3-bbfb-4603-be2f-5445504ef1ec");
+        mNames.add("Havasu Falls");
+
+        mImageUrls.add("https://firebasestorage.googleapis.com/v0/b/pro-female.appspot.com/o/p_2.png?alt=media&token=48943435-f4bb-4e07-ad2d-b34f46d1fa75");
+        mNames.add("Trondheim");
+
+        mImageUrls.add("https://firebasestorage.googleapis.com/v0/b/pro-female.appspot.com/o/p_3.png?alt=media&token=61ccc4c1-1640-4df4-9c72-87f579eae0c9");
+        mNames.add("Portugal");
+
+        mImageUrls.add("https://firebasestorage.googleapis.com/v0/b/pro-female.appspot.com/o/p_4.png?alt=media&token=e8b7f68e-8945-42da-8dda-70294476cb69");
+        mNames.add("Rocky Mountain National Park");
+
+
+        mImageUrls.add("https://firebasestorage.googleapis.com/v0/b/pro-female.appspot.com/o/p_5.png?alt=media&token=ff94008b-8309-4701-9235-dc71f8f81fbb");
+        mNames.add("Mahahual");
+
+        mImageUrls.add("https://firebasestorage.googleapis.com/v0/b/pro-female.appspot.com/o/p_6.png?alt=media&token=b7e70331-26a4-4914-8a7a-eb35a68c142a");
+        mNames.add("Frozen Lake");
+
+
+        mImageUrls.add("https://firebasestorage.googleapis.com/v0/b/pro-female.appspot.com/o/p_7.png?alt=media&token=8f4b4f0e-277b-4205-b02d-62639f86df9d");
+        mNames.add("White Sands Desert");
+
+        mImageUrls.add("https://firebasestorage.googleapis.com/v0/b/pro-female.appspot.com/o/p_8.png?alt=media&token=c151037b-27b9-425e-9557-40258f72f217");
+        mNames.add("Austrailia");
+
+        mImageUrls.add("https://firebasestorage.googleapis.com/v0/b/pro-female.appspot.com/o/p_9.png?alt=media&token=c7a2c4c4-0ee7-4185-a3e3-d67cddbec909");
+        mNames.add("Washington");
+
+        mImageUrls.add("https://firebasestorage.googleapis.com/v0/b/pro-female.appspot.com/o/p_10.png?alt=media&token=1d623bd8-5d5f-4564-bfe3-4431d84de6ae");
+        mNames.add("Washington");
+
+
+        initRecyclerView();
+
+    }
+
+
+    public class StaggeredRecyclerViewAdapter extends RecyclerView.Adapter<StaggeredRecyclerViewAdapter.ViewHolder> {
+
+        private static final String TAG = "StaggeredRecyclerViewAd";
+        private ArrayList<String> mNames = new ArrayList<>();
+        private ArrayList<String> mImagensUrls = new ArrayList<>();
+        private Context mContext;
+
+        public StaggeredRecyclerViewAdapter(Context mContext, ArrayList<String> mNames, ArrayList<String> mImagensUrls) {
+            this.mNames = mNames;
+            this.mImagensUrls = mImagensUrls;
+            this.mContext = mContext;
         }
 
         @NonNull
         @Override
-        public GridHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-            View view = LayoutInflater.from(getActivity()).inflate(R.layout.grid_rv, viewGroup, false);
-            return new GridHolder(view);
+        public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+            View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.grid_rv_principais, viewGroup, false);
+            return new ViewHolder(view);
         }
 
         @Override
-        public void onBindViewHolder(@NonNull GridHolder gridHolder, int i) {
-            gridHolder.image_view.setImageBitmap(bitmaps[i]);
-            gridHolder.text_view.setText("Putaria: " + i);
+        public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
+            Log.d(TAG, "onBindViewHolder: Called.");
+
+            RequestOptions requestOptions = new RequestOptions()
+                    .placeholder(R.drawable.ic_launcher_background);
+
+            Glide.with(mContext)
+                    .load(mImagensUrls.get(i))
+                    .apply(requestOptions)
+                    .into(viewHolder.image);
+
+            viewHolder.descricao.setText(mNames.get(i));
+
+            viewHolder.image.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d(TAG, "onClick: clicked on: " + mNames.get(i));
+                    Toast.makeText(mContext, mNames.get(i), Toast.LENGTH_SHORT).show();
+                }
+            });
         }
 
         @Override
         public int getItemCount() {
-            return bitmaps.length;
+            return mImagensUrls.size();
         }
+
+        public class ViewHolder extends RecyclerView.ViewHolder {
+
+            ImageView image;
+            TextView descricao;
+
+            public ViewHolder(@NonNull View itemView) {
+                super(itemView);
+                image = itemView.findViewById(R.id.image_principais);
+                descricao = itemView.findViewById(R.id.descricao_principais);
+            }
+        }
+
     }
 
-    private class GridHolder extends RecyclerView.ViewHolder{
-        ImageView image_view;
-        TextView text_view;
-        public GridHolder(@NonNull View itemView) {
-            super(itemView);
-            image_view = itemView.findViewById(R.id.image);
-            text_view = itemView.findViewById(R.id.descricao);
-        }
-    }
 }
