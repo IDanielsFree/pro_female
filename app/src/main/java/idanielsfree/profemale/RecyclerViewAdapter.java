@@ -1,6 +1,7 @@
 package idanielsfree.profemale;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -34,7 +35,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         view_holder.item_categorias.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "TESTE " + String.valueOf(view_holder.getAdapterPosition()), Toast.LENGTH_SHORT).show();
+                seleciona_activity(view_holder.getAdapterPosition());
             }
         });
 
@@ -64,6 +65,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             item_categorias = itemView.findViewById(R.id.categoria_item);
             descricao = itemView.findViewById(R.id.descricao_categoria);
             foto = itemView.findViewById(R.id.img_categoria);
+        }
+    }
+
+    private void seleciona_activity(int i) {
+        if (i == 0) {
+            Intent settingsIntent = new Intent(context, ImagensActivity.class);
+            context.startActivity(settingsIntent);
         }
     }
 
