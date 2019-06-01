@@ -7,10 +7,12 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,12 +30,17 @@ public class ImagensActivity extends AppCompatActivity {
     private ArrayList<String> mImageUrls = new ArrayList<>();
     private ArrayList<String> mNames = new ArrayList<>();
 
+    //
+
+    private ArrayList<String> categories = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_imagens);
 
         initImageBitmaps();
+        initCategories();
 
     }
 
@@ -88,6 +95,32 @@ public class ImagensActivity extends AppCompatActivity {
 
     }
 
+    //
+
+    private void initRecyclerViewCategories() {
+        RecyclerView recyclerView = findViewById(R.id.recyclerview_categorias_imagens);
+        RecyclerViewAdapterCategories RecyclerViewAdapter = new RecyclerViewAdapterCategories(this, categories);
+        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(1, LinearLayoutManager.HORIZONTAL);
+        recyclerView.setLayoutManager(staggeredGridLayoutManager);
+        recyclerView.setAdapter(RecyclerViewAdapter);
+    }
+
+    private void initCategories() {
+        categories.add("Quente");
+        categories.add("Ultra sensuais");
+        categories.add("Friozinho");
+        categories.add("Daniel");
+        categories.add("Oloco meu!");
+        categories.add("WTF!");
+        categories.add("My Love...");
+        categories.add("I want you");
+        categories.add("Sexy");
+        categories.add("Fucked");
+
+        initRecyclerViewCategories();
+    }
+
+    //
 
     public class StaggeredRecyclerViewAdapter extends RecyclerView.Adapter<StaggeredRecyclerViewAdapter.ViewHolder> {
 
@@ -147,6 +180,55 @@ public class ImagensActivity extends AppCompatActivity {
                 image = itemView.findViewById(R.id.image_imagens);
                 descricao = itemView.findViewById(R.id.descricao_imagens);
             }
+        }
+
+    }
+
+    ////
+
+    public class RecyclerViewAdapterCategories extends RecyclerView.Adapter<RecyclerViewAdapterCategories.ViewHolderCategories> {
+
+        private ArrayList<String> categories = new ArrayList<>();
+        private Context context;
+
+        public RecyclerViewAdapterCategories(Context context, ArrayList<String> categories) {
+            this.categories = categories;
+            this.context = context;
+        }
+
+        @NonNull
+        @Override
+        public ViewHolderCategories onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+            View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.grid_rv_imagens_categorias, viewGroup, false);
+            return new ViewHolderCategories(view);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull final ViewHolderCategories holder, int i) {
+            holder.botao_categoria.setText(categories.get(i));
+
+            holder.botao_categoria.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context, holder.botao_categoria.getText(), Toast.LENGTH_LONG).show();
+                }
+            });
+        }
+
+        @Override
+        public int getItemCount() {
+            return categories.size();
+        }
+
+        public class ViewHolderCategories extends RecyclerView.ViewHolder {
+
+            Button botao_categoria;
+
+            public ViewHolderCategories(View itemView) {
+                super(itemView);
+                botao_categoria = itemView.findViewById(R.id.categorias_imagens_button);
+            }
+
         }
 
     }

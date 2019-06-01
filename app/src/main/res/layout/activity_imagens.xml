@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#E6E6E6"
     android:orientation="vertical"
     tools:context=".ImagensActivity">
 
-    <android.support.design.widget.TabLayout
-        android:id="@+id/tablayout"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview_categorias_imagens"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/gradient"
-        app:tabMode="fixed"
-        app:tabGravity="fill">
+        android:layout_height="55dp"
+        android:orientation="horizontal">
 
-    </android.support.design.widget.TabLayout>
+    </android.support.v7.widget.RecyclerView>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerview_imagens"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_height="match_parent"
+        android:layout_below="@id/recyclerview_categorias_imagens">
 
     </android.support.v7.widget.RecyclerView>
 
-</LinearLayout>
+</RelativeLayout>
