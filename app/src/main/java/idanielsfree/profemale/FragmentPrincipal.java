@@ -1,6 +1,7 @@
 package idanielsfree.profemale;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,11 +28,14 @@ import java.util.ArrayList;
 public class FragmentPrincipal extends Fragment {
 
     View v;
-    private static final String TAG = "FragmentPrincipal";
-    private static final int NUM_COLUMNS = 2;
+    private static final int NUM_COLUMNS = 1;
 
     private ArrayList<String> mImageUrls = new ArrayList<>();
     private ArrayList<String> mNames = new ArrayList<>();
+
+    //
+
+    private Button imagens_show;
 
     public FragmentPrincipal() {
 
@@ -41,25 +46,40 @@ public class FragmentPrincipal extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.principal_fragment,container,false);
 
+        initElements();
+
         initImageBitmaps();
+
+        //
+
+        imagens_show.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent settingsIntent = new Intent(getContext(), ImagensActivity.class);
+                startActivity(settingsIntent);
+            }
+        });
 
         return v;
     }
 
+    //
+
+    private void initElements() {
+        imagens_show = v.findViewById(R.id.principais_imagem_show);
+    }
+
+    //
 
     private void initRecyclerView() {
-        Log.d(TAG, "initRecyclerView: preparing staggered recyclerview.");
-
-        RecyclerView recyclerView = v.findViewById(R.id.recyclerview_principais);
-        StaggeredRecyclerViewAdapter staggeredRecyclerViewAdapter = new StaggeredRecyclerViewAdapter(getContext(), mNames, mImageUrls);
-        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(NUM_COLUMNS, LinearLayoutManager.VERTICAL);
+        RecyclerView recyclerView = v.findViewById(R.id.recyclerview_principais_imagens);
+        StaggeredRecyclerViewAdapter staggeredRecyclerViewAdapter = new StaggeredRecyclerViewAdapter(v.getContext(), mNames, mImageUrls);
+        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(NUM_COLUMNS, LinearLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(staggeredGridLayoutManager);
         recyclerView.setAdapter(staggeredRecyclerViewAdapter);
-
     }
 
     private void initImageBitmaps() {
-        Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
 
         mImageUrls.add("https://firebasestorage.googleapis.com/v0/b/pro-female.appspot.com/o/p_1.png?alt=media&token=d49cf9d3-bbfb-4603-be2f-5445504ef1ec");
         mNames.add("Havasu Falls");
@@ -98,8 +118,9 @@ public class FragmentPrincipal extends Fragment {
 
     }
 
+    //
 
-    public class StaggeredRecyclerViewAdapter extends RecyclerView.Adapter<StaggeredRecyclerViewAdapter.ViewHolder> {
+    public class StaggeredRecyclerViewAdapter extends RecyclerView.Adapter<FragmentPrincipal.StaggeredRecyclerViewAdapter.ViewHolder> {
 
         private static final String TAG = "StaggeredRecyclerViewAd";
         private ArrayList<String> mNames = new ArrayList<>();
@@ -114,13 +135,13 @@ public class FragmentPrincipal extends Fragment {
 
         @NonNull
         @Override
-        public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        public FragmentPrincipal.StaggeredRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
             View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.grid_rv_principais, viewGroup, false);
-            return new ViewHolder(view);
+            return new StaggeredRecyclerViewAdapter.ViewHolder(view);
         }
 
         @Override
-        public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
+        public void onBindViewHolder(@NonNull FragmentPrincipal.StaggeredRecyclerViewAdapter.ViewHolder viewHolder, final int i) {
             Log.d(TAG, "onBindViewHolder: Called.");
 
             RequestOptions requestOptions = new RequestOptions()

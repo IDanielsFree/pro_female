@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
         adapter.AddFragment(new FragmentPrincipal(), "");
-        adapter.AddFragment(new FragmentCategorias(), "");
+        adapter.AddFragment(new FragmentInscricoes(), "");
 
         viewpager.setAdapter(adapter);
         tablayout.setupWithViewPager(viewpager);
