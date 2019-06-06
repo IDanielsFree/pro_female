@@ -9,19 +9,147 @@
     android:orientation="vertical"
     tools:context=".ImagensActivity">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerview_categorias_imagens"
+    <HorizontalScrollView
+        android:id="@+id/hsv"
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:orientation="horizontal">
+        android:scrollbars="none">
 
-    </android.support.v7.widget.RecyclerView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="4dp">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/button_gradient"
+                android:layout_marginEnd="5dp"
+                android:padding="5dp"
+                android:text="Exemplo"
+                android:textColor="#fff"
+                android:textSize="14sp"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/button_gradient"
+                android:layout_marginEnd="5dp"
+                android:padding="5dp"
+                android:text="Exemplo"
+                android:textColor="#fff"
+                android:textSize="14sp"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/button_gradient"
+                android:layout_marginEnd="5dp"
+                android:padding="5dp"
+                android:text="Exemplo"
+                android:textColor="#fff"
+                android:textSize="14sp"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/button_gradient"
+                android:layout_marginEnd="5dp"
+                android:padding="5dp"
+                android:text="Exemplo"
+                android:textColor="#fff"
+                android:textSize="14sp"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/button_gradient"
+                android:layout_marginEnd="5dp"
+                android:padding="5dp"
+                android:text="Exemplo"
+                android:textColor="#fff"
+                android:textSize="14sp"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/button_gradient"
+                android:layout_marginEnd="5dp"
+                android:padding="5dp"
+                android:text="Exemplo"
+                android:textColor="#fff"
+                android:textSize="14sp"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/button_gradient"
+                android:layout_marginEnd="5dp"
+                android:padding="5dp"
+                android:text="Exemplo"
+                android:textColor="#fff"
+                android:textSize="14sp"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/button_gradient"
+                android:layout_marginEnd="5dp"
+                android:padding="5dp"
+                android:text="Exemplo"
+                android:textColor="#fff"
+                android:textSize="14sp"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/button_gradient"
+                android:layout_marginEnd="5dp"
+                android:padding="5dp"
+                android:text="Exemplo"
+                android:textColor="#fff"
+                android:textSize="14sp"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/button_gradient"
+                android:layout_marginEnd="5dp"
+                android:padding="5dp"
+                android:text="Exemplo"
+                android:textColor="#fff"
+                android:textSize="14sp"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/button_gradient"
+                android:layout_marginEnd="5dp"
+                android:padding="5dp"
+                android:text="Exemplo"
+                android:textColor="#fff"
+                android:textSize="14sp"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/button_gradient"
+                android:layout_marginEnd="5dp"
+                android:padding="5dp"
+                android:text="Exemplo"
+                android:textColor="#fff"
+                android:textSize="14sp"/>
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerview_imagens"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/recyclerview_categorias_imagens">
+        android:layout_below="@id/hsv">
 
     </android.support.v7.widget.RecyclerView>
 

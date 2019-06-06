@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,15 +30,12 @@ public class ImagensActivity extends AppCompatActivity {
 
     //
 
-    private ArrayList<String> categories = new ArrayList<>();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_imagens);
 
         initImageBitmaps();
-        initCategories();
 
     }
 
@@ -47,7 +43,7 @@ public class ImagensActivity extends AppCompatActivity {
         Log.d(TAG, "initRecyclerView: preparing staggered recyclerview.");
 
         RecyclerView recyclerView = findViewById(R.id.recyclerview_imagens);
-        StaggeredRecyclerViewAdapter staggeredRecyclerViewAdapter = new StaggeredRecyclerViewAdapter(this, mNames, mImageUrls);
+        StaggeredRecyclerViewAdapterImagens staggeredRecyclerViewAdapter = new StaggeredRecyclerViewAdapterImagens(this, mNames, mImageUrls);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(NUM_COLUMNS, LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(staggeredGridLayoutManager);
         recyclerView.setAdapter(staggeredRecyclerViewAdapter);
@@ -96,39 +92,14 @@ public class ImagensActivity extends AppCompatActivity {
 
     //
 
-    private void initRecyclerViewCategories() {
-        RecyclerView recyclerView = findViewById(R.id.recyclerview_categorias_imagens);
-        RecyclerViewAdapterCategories RecyclerViewAdapter = new RecyclerViewAdapterCategories(this, categories);
-        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(1, LinearLayoutManager.HORIZONTAL);
-        recyclerView.setLayoutManager(staggeredGridLayoutManager);
-        recyclerView.setAdapter(RecyclerViewAdapter);
-    }
-
-    private void initCategories() {
-        categories.add("Quente");
-        categories.add("Ultra sensuais");
-        categories.add("Friozinho");
-        categories.add("Daniel");
-        categories.add("Oloco meu!");
-        categories.add("WTF!");
-        categories.add("My Love...");
-        categories.add("I want you");
-        categories.add("Sexy");
-        categories.add("Fucked");
-
-        initRecyclerViewCategories();
-    }
-
-    //
-
-    public class StaggeredRecyclerViewAdapter extends RecyclerView.Adapter<StaggeredRecyclerViewAdapter.ViewHolder> {
+    public class StaggeredRecyclerViewAdapterImagens extends RecyclerView.Adapter<StaggeredRecyclerViewAdapterImagens.ViewHolderImagens> {
 
         private static final String TAG = "StaggeredRecyclerViewAd";
         private ArrayList<String> mNames = new ArrayList<>();
         private ArrayList<String> mImagensUrls = new ArrayList<>();
         private Context mContext;
 
-        public StaggeredRecyclerViewAdapter(Context mContext, ArrayList<String> mNames, ArrayList<String> mImagensUrls) {
+        public StaggeredRecyclerViewAdapterImagens(Context mContext, ArrayList<String> mNames, ArrayList<String> mImagensUrls) {
             this.mNames = mNames;
             this.mImagensUrls = mImagensUrls;
             this.mContext = mContext;
@@ -136,13 +107,13 @@ public class ImagensActivity extends AppCompatActivity {
 
         @NonNull
         @Override
-        public StaggeredRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        public ViewHolderImagens onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
             View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.grid_rv_imagens, viewGroup, false);
-            return new ViewHolder(view);
+            return new ViewHolderImagens(view);
         }
 
         @Override
-        public void onBindViewHolder(@NonNull StaggeredRecyclerViewAdapter.ViewHolder viewHolder, final int i) {
+        public void onBindViewHolder(@NonNull ViewHolderImagens viewHolder, final int i) {
             Log.d(TAG, "onBindViewHolder: Called.");
 
             RequestOptions requestOptions = new RequestOptions()
@@ -169,12 +140,12 @@ public class ImagensActivity extends AppCompatActivity {
             return mImagensUrls.size();
         }
 
-        public class ViewHolder extends RecyclerView.ViewHolder {
+        public class ViewHolderImagens extends RecyclerView.ViewHolder {
 
             ImageView image;
             TextView descricao;
 
-            public ViewHolder(@NonNull View itemView) {
+            public ViewHolderImagens(@NonNull View itemView) {
                 super(itemView);
                 image = itemView.findViewById(R.id.image_imagens);
                 descricao = itemView.findViewById(R.id.descricao_imagens);
@@ -184,52 +155,5 @@ public class ImagensActivity extends AppCompatActivity {
     }
 
     ////
-
-    public class RecyclerViewAdapterCategories extends RecyclerView.Adapter<RecyclerViewAdapterCategories.ViewHolderCategories> {
-
-        private ArrayList<String> categories = new ArrayList<>();
-        private Context context;
-
-        public RecyclerViewAdapterCategories(Context context, ArrayList<String> categories) {
-            this.categories = categories;
-            this.context = context;
-        }
-
-        @NonNull
-        @Override
-        public ViewHolderCategories onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-            View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.grid_rv_imagens_categorias, viewGroup, false);
-            return new ViewHolderCategories(view);
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull final ViewHolderCategories holder, int i) {
-            holder.botao_categoria.setText(categories.get(i));
-
-            holder.botao_categoria.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(context, holder.botao_categoria.getText(), Toast.LENGTH_LONG).show();
-                }
-            });
-        }
-
-        @Override
-        public int getItemCount() {
-            return categories.size();
-        }
-
-        public class ViewHolderCategories extends RecyclerView.ViewHolder {
-
-            Button botao_categoria;
-
-            public ViewHolderCategories(View itemView) {
-                super(itemView);
-                botao_categoria = itemView.findViewById(R.id.categorias_imagens_button);
-            }
-
-        }
-
-    }
 
 }

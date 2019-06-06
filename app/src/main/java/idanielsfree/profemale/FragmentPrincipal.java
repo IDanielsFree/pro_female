@@ -2,7 +2,6 @@ package idanielsfree.profemale;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -22,7 +21,6 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
-import java.net.URI;
 import java.util.ArrayList;
 
 public class FragmentPrincipal extends Fragment {
@@ -136,7 +134,7 @@ public class FragmentPrincipal extends Fragment {
         @NonNull
         @Override
         public FragmentPrincipal.StaggeredRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-            View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.grid_rv_principais, viewGroup, false);
+            View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.grid_rv_principais_imagens, viewGroup, false);
             return new StaggeredRecyclerViewAdapter.ViewHolder(view);
         }
 
